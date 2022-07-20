@@ -6,9 +6,12 @@ import (
 	"test/routers"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	// 加载env
+	godotenv.Load(".env")
 	// 创建路由
 	r := gin.Default()
 	routers.InitRouter(r)

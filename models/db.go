@@ -22,7 +22,8 @@ var DB *gorm.DB
 // ConnectDB 连接数据库
 func ConnectDB() {
 	driver := os.Getenv("DB_DRIVER")
-	fmt.Println(driver)
+	fmt.Printf("数据库类型：%s\n", driver)
+
 	switch driver {
 	case DRIVER_MY_SQL:
 		DB = ConnectDbMySQL(
@@ -88,6 +89,7 @@ func ConnectDbMySQL(host, port, database, user, pass, charset string) *gorm.DB {
 	openConnections, _ := strconv.Atoi(os.Getenv("DB_MAX_OPEN_CONNECTIONS"))
 	db.DB().SetMaxOpenConns(maxConnections)
 	db.DB().SetMaxIdleConns(openConnections)
+	db.DB().Ping()
 	return db
 }
 
